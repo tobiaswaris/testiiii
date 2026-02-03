@@ -2,17 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- THIS makes it responsive -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>A tiny question ❤️</title>
 
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 
-*{
-    box-sizing:border-box;
-}
+<style>
 
 body{
     margin:0;
@@ -20,42 +16,64 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ffe6f0,#ffd6e7);
-    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    text-align:center;
-    padding:20px;
+    background:linear-gradient(135deg,#ffd1dc,#ffe4ec);
+    font-family:'Quicksand', sans-serif;
+    overflow:hidden;
 }
 
-/* container prevents stretching on large screens */
+/* floating hearts */
+
+.heart{
+    position:absolute;
+    bottom:-20px;
+    color:#ff4d6d;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+
 .container{
     max-width:500px;
-    width:100%;
+    width:90%;
+    text-align:center;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.08);
 }
 
 h1{
-    font-size:clamp(28px, 6vw, 42px);
-    margin-bottom:30px;
+    font-size:clamp(28px,6vw,42px);
 }
 
 .buttons{
+    margin-top:25px;
     display:flex;
     flex-direction:column;
     gap:15px;
 }
 
-/* big phone-friendly buttons */
 button{
-    width:100%;
     padding:18px;
     font-size:20px;
     border:none;
     border-radius:14px;
     cursor:pointer;
-    transition:0.2s;
+    transition:.2s;
 }
 
 button:active{
-    transform:scale(0.96);
+    transform:scale(.96);
 }
 
 .yes-button{
@@ -64,10 +82,9 @@ button:active{
 }
 
 .no-button{
-    background:white;
+    background:#eee;
 }
 
-/* On wider screens, place buttons side-by-side */
 @media(min-width:600px){
     .buttons{
         flex-direction:row;
@@ -81,27 +98,43 @@ button:active{
 
 <div class="container">
 
-<h1>Will you be my Valentine? ❤️</h1>
+<h1>Will you go to dinner with me? ❤️</h1>
 
 <div class="buttons">
-    <button class="yes-button" onclick="handleYesClick()">YES 💘</button>
-    <button class="no-button" onclick="handleNoClick()">No</button>
+<button class="yes-button" onclick="handleYesClick()">YES 💘</button>
+<button class="no-button" onclick="handleNoClick()">No</button>
 </div>
 
 </div>
 
 <script>
 
+// floating hearts generator
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*20 + 10) + "px";
+    heart.style.animationDuration = (Math.random()*3 + 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+
 const messages = [
-   "Are you sure?",
+   "Are you sure? 🙂",
    "Really sure??",
-   "Think again 🙂",
+   "Just think about it...",
+   "It could be fun...",
+   "I might even let you pick dessert 😌",
+   "Don’t break my heart...",
    "Last chance!",
-   "Pookie please...",
-   "You're breaking my heart 💔",
-   "I will be VERY sad...",
-   "Ok fine… I tried 😔",
-   "Just kidding — say yes!! ❤️"
+   "Okay fine…",
+   "Wait… what if I insist?",
+   "Yes ❤️"
 ];
 
 let messageIndex = 0;
@@ -111,31 +144,45 @@ function handleNoClick() {
    const noButton = document.querySelector('.no-button');
    const yesButton = document.querySelector('.yes-button');
 
+   // LAST message becomes YES
+   if(messageIndex === messages.length - 1){
+        handleYesClick();
+        return;
+   }
+
    noButton.textContent = messages[messageIndex];
-   messageIndex = (messageIndex + 1) % messages.length;
+   messageIndex++;
 
    const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-   yesButton.style.fontSize = `${currentSize * 1.25}px`;
+   yesButton.style.fontSize = `${currentSize * 1.2}px`;
 }
 
 function handleYesClick() {
-   document.body.innerHTML = `
-       <div style="
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            flex-direction:column;
-            background:linear-gradient(135deg,#ff758c,#ff7eb3);
-            color:white;
-            font-family:sans-serif;
-            text-align:center;
-            padding:20px;
-       ">
-            <h1 style="font-size:clamp(32px,8vw,52px);">YAY!!! ❤️🥰</h1>
-            <p style="font-size:22px;">You just made me the happiest person alive.</p>
-       </div>
-   `;
+
+document.body.innerHTML = `
+<div style="
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+font-family:'Quicksand',sans-serif;
+padding:30px;
+">
+
+<h1 style="font-size:clamp(32px,8vw,56px);">
+Sorry… looks like you're stuck having dinner with me 💕
+</h1>
+
+<p style="font-size:22px;margin-top:10px;">
+I promise it'll be worth it ❤️
+</p>
+
+</div>
+`;
 }
 
 </script>
