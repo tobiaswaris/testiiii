@@ -1,57 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A tiny question ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffd1dc,#ffe4ec);
+font-family:'Quicksand', sans-serif;
+overflow:hidden;
+position:relative; /* fixes floating hearts */
+}
+
+/* Floating hearts */
+
+.heart{
+position:fixed;
+bottom:-20px;
+color:#ff4d6d;
+animation:float linear forwards;
+pointer-events:none;
+}
+
+@keyframes float{
+from{
+transform:translateY(0);
+opacity:1;
+}
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+/* Card */
+
+.container{
+max-width:500px;
+width:90%;
+text-align:center;
+background:white;
+padding:40px;
+border-radius:22px;
+box-shadow:0 15px 50px rgba(0,0,0,0.08);
+z-index:2;
+}
+
+h1{
+font-size:clamp(28px,6vw,42px);
+margin-bottom:10px;
+}
+
+.buttons{
+margin-top:25px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+button{
+padding:18px;
+font-size:20px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+transition:.25s;
+}
+
+button:active{
+transform:scale(.96);
+}
+
+.yes-button{
+background:#ff4d6d;
+color:white;
+}
+
+.no-button{
+background:#eee;
+}
+
+@media(min-width:600px){
+.buttons{
+flex-direction:row;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Will you go to dinner with me? ❤️</h1>
+
+<div class="buttons">
+<button class="yes-button" onclick="handleYesClick()">YES 💘</button>
+<button class="no-button" onclick="handleNoClick()">No</button>
+</div>
+
+</div>
+
 <script>
 
-// floating hearts generator
+/* ❤️ Floating hearts across full screen */
 setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20 + 10) + "px";
-    heart.style.animationDuration = (Math.random()*3 + 3) + "s";
 
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),6000);
-},300);
+const heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "❤️";
 
+heart.style.left = (Math.random()*90 + 5) + "vw";
+heart.style.fontSize = (Math.random()*18 + 12) + "px";
+heart.style.animationDuration = (Math.random()*3 + 4) + "s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),7000);
+
+}, 250);
+
+
+
+/* NO messages */
 
 const messages = [
-   "Are you sure? 🙂",
-   "Really sure??",
-   "Just think about it...",
-   "It could be fun...",
-   "I might even let you pick dessert 😌",
-   "Don’t break my heart...",
-   "Last chance!",
-   "Okay fine…",
-   "Wait… what if I insist?",
-   "Yes ❤️"
+"Are you sure? 🙂",
+"Really sure??",
+"Think about the food...",
+"It could be fun...",
+"I might let you pick dessert 😌",
+"Don’t break my heart...",
+"Last chance!",
+"Okay fine…",
+"Wait… what if I insist?",
+"Fine… YES ❤️"
 ];
 
 let messageIndex = 0;
 
-function handleNoClick() {
 
-   const noButton = document.querySelector('.no-button');
-   const yesButton = document.querySelector('.yes-button');
+/* NO button behavior */
 
-   // LAST message triggers the playful forced yes
-   if(messageIndex === messages.length - 1){
-        forcedYes();
-        return;
-   }
+function handleNoClick(){
 
-   noButton.textContent = messages[messageIndex];
-   messageIndex++;
+const noButton = document.querySelector('.no-button');
+const yesButton = document.querySelector('.yes-button');
 
-   const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-   yesButton.style.fontSize = `${currentSize * 1.2}px`;
+/* After full loop → playful forced yes */
+if(messageIndex === messages.length - 1){
+forcedYes();
+return;
+}
+
+noButton.textContent = messages[messageIndex];
+messageIndex++;
+
+/* grow yes button */
+const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+yesButton.style.fontSize = `${currentSize * 1.15}px`;
+
 }
 
 
-// ✅ REAL YES (when she actually presses yes)
-function handleYesClick() {
+
+/* REAL YES */
+
+function handleYesClick(){
 
 document.body.innerHTML = `
+
 <div style="
 height:100vh;
 display:flex;
@@ -78,10 +211,13 @@ I can't wait for our dinner 🥰
 }
 
 
-// 😄 PLAYFUL FORCED YES
-function forcedYes() {
+
+/* PLAYFUL FORCED YES */
+
+function forcedYes(){
 
 document.body.innerHTML = `
+
 <div style="
 height:100vh;
 display:flex;
@@ -108,3 +244,6 @@ I promise it'll be worth it ❤️
 }
 
 </script>
+
+</body>
+</html>
