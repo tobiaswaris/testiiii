@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A tiny question ❤️</title>
+  <title>En liten fråga ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -79,10 +79,10 @@
 <body>
 
   <div class="container">
-    <h1>Will you go to dinner with me? ❤️</h1>
+    <h1>Vill du komma och äta med mig? ❤️</h1>
     <div class="buttons">
-      <button class="yes-button" onclick="handleYesClick()">YES 💘</button>
-      <button class="no-button" onclick="handleNoClick()">No</button>
+      <button class="yes-button" onclick="handleYesClick()">Jo 💘</button>
+      <button class="no-button" onclick="handleNoClick()">Nä</button>
     </div>
   </div>
 
@@ -101,16 +101,16 @@
 
     /* NO messages */
     const messages = [
-      "Are you sure? 🙂",
-      "Really sure??",
-      "Think about the food...",
-      "It could be fun...",
-      "I might let you pick dessert 😌",
+      "Är du säker? 🙂",
+      "Helt säker??",
+      "Tänk på den goda maten...",
+      "De sku kunna oxå vara jätte roligt...",
+      "De är såååå god mat, kom nu o fylla magen ens...",
       "Don’t break my heart...",
-      "Last chance!",
-      "Okay fine…",
-      "Wait… what if I insist?",
-      "Fine… YES ❤️"
+      "Sista möjligheten!",
+      "Ok, int då…",
+      "Vänta ännu... om ja tvingar dig?",
+      "Okej… Jo ja kommer ❤️"
     ];
 
     let messageIndex = 0;
@@ -140,12 +140,12 @@
     /* REAL YES (immediate or after No) */
     function handleYesClick(){
       const title   = hasClickedNo
-        ? "Sorry… looks like you're stuck having dinner with me 💕"
-        : "You just made me the happiest person alive ❤️";
+        ? "Förlåt… ser ut som att du får nöja dig med att äta middag med mig. 😏 💕"
+        : "Älskliiiiiiiing 💕❤️💕";
 
       const subtitle = hasClickedNo
-        ? "I promise it'll be worth it ❤️"
-        : "I can't wait to spoil you at dinner 🥰";
+        ? "Jag lovar, det kommer och vara värt det ❤️"
+        : "Du kommer och få såååååå god mat 🥰";
 
       document.body.innerHTML = `
         <div style="
@@ -186,10 +186,10 @@
           padding:30px;
         ">
           <h1 style="font-size:clamp(32px,8vw,56px);">
-            Sorry… looks like you're stuck having dinner with me 💕
+            Förlåt… ser ut som att du får nöja dig med att äta middag med mig. 😏 💕
           </h1>
           <p style="font-size:22px; margin-top:10px;">
-            I promise it'll be worth it ❤️
+            Jag lovar, det kommer och vara värt det ❤️
           </p>
         </div>
       `;
